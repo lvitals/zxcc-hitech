@@ -244,8 +244,22 @@ void load_comfile(void)
     Msg("Loaded %d bytes from %s\n", com_len, fname);
 }
 
-unsigned int in() { return 0; }
-unsigned int out() { return 0; }
+unsigned int in(unsigned int tstates, unsigned char b, unsigned char c)
+{
+    (void)tstates;
+    (void)b;
+    (void)c;
+    return 0;
+}
+
+unsigned int out(unsigned int tstates, unsigned char b, unsigned char c, unsigned char value)
+{
+    (void)tstates;
+    (void)b;
+    (void)c;
+    (void)value;
+    return 0;
+}
 
 /*
  * xltname: Convert a unix filepath into a CP/M compatible drive:name form.

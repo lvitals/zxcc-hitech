@@ -20,6 +20,10 @@
     This file deals with drive-based functions.
 */
 
+#ifdef __linux__
+#include <sys/vfs.h>
+#endif
+
 #include "cpmint.h"
 
 #ifdef _MSC_VER

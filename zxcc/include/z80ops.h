@@ -16,6 +16,10 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#ifdef __linux__
+#include <sys/vfs.h>
+#endif
+
 #define instr(opcode,cycles) case opcode: {tstates+=cycles
 #define HLinstr(opcode,cycles,morecycles) \
                              case opcode: {unsigned short addr; \
