@@ -9,12 +9,12 @@ MKDIR_P = mkdir -p
 TEST = test
 ECHO = echo
 
-# Common installation paths
+# Common installation paths (default values, can be overridden)
 PREFIX ?= /usr/local
-BINDIR = $(PREFIX)/bin
-LIBDIR = $(PREFIX)/lib/cpm
-INCDIR = $(PREFIX)/include
-DOCDIR = $(PREFIX)/share/doc
+BINDIR ?= $(PREFIX)/bin
+LIBDIR ?= $(PREFIX)/lib/cpm
+INCDIR ?= $(PREFIX)/include
+DOCDIR ?= $(PREFIX)/share/doc
 
 # Paths for zxcc
 ZXCC_DIR = $(CURDIR)/zxcc
@@ -45,22 +45,19 @@ hitech: zxcc
 
 # Rule to install (requires sudo)
 install: zxcc hitech
-	@$(ECHO) "Installing to $(PREFIX) - may require sudo privileges"
-	@$(MKDIR_P) $(DESTDIR)$(BINDIR)
-	@$(MKDIR_P) $(DESTDIR)$(LIBDIR)
-	@$(MKDIR_P) $(DESTDIR)$(INCDIR)
+	@$(ECHO) "Installing - may require sudo privileges"
 	@$(ECHO) "Installing zxcc..."
-	$(MAKE) -C $(ZXCC_DIR) install PREFIX=$(PREFIX)
+	$(MAKE) -C $(ZXCC_DIR) install
 	@$(ECHO) "Installing hitech..."
-	$(MAKE) -C hitech install PREFIX=$(PREFIX)
+	PATH="$(ZXCC_BIN):$$PATH" $(MAKE) -C hitech install
 
 # Rule to uninstall (requires sudo)
 uninstall:
-	@$(ECHO) "Uninstalling from $(PREFIX) - may require sudo privileges"
+	@$(ECHO) "Uninstalling - may require sudo privileges"
 	@$(ECHO) "Uninstalling hitech..."
-	$(MAKE) -C hitech uninstall PREFIX=$(PREFIX)
+	$(MAKE) -C hitech uninstall
 	@$(ECHO) "Uninstalling zxcc..."
-	$(MAKE) -C $(ZXCC_DIR) uninstall PREFIX=$(PREFIX)
+	$(MAKE) -C $(ZXCC_DIR) uninstall
 
 # Rule to clean build artifacts
 clean:
