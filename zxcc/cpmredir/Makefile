@@ -1,10 +1,20 @@
 # Compiler and tools
 CC = gcc
-CFLAGS = -O2 -Wall -Wextra -arch arm64 -Iinclude
+CFLAGS = -O2 -Wall -Wextra -Iinclude
 AR = ar
 RANLIB = ranlib
 MKDIR = mkdir -p
 RM = rm -rf
+
+# Detect system architecture
+UNAME_M := $(shell uname -m)
+
+# Architecture-specific flags
+ifeq ($(UNAME_M),arm64)
+    CFLAGS += -arch arm64
+else ifeq ($(UNAME_M),x86_64)
+    CFLAGS += -march=native
+endif
 
 # Directory structure
 SRC_DIR = src

@@ -1,7 +1,17 @@
 CC = gcc
-CFLAGS = -O2 -Wall -Wextra -arch arm64 -Iinclude
+CFLAGS = -O2 -Wall -Wextra -Iinclude
 AR = ar
 RANLIB = ranlib
+
+# Detect system architecture
+UNAME_M := $(shell uname -m)
+
+# Architecture-specific flags
+ifeq ($(UNAME_M),arm64)
+    CFLAGS += -arch arm64
+else ifeq ($(UNAME_M),x86_64)
+    CFLAGS += -march=native
+endif
 
 SRC_DIR = src
 INC_DIR = include
