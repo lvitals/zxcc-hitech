@@ -25,14 +25,14 @@ BIN_DIR = bin
 PROGRAMS := zxas zxc zxcc zxlibr zxlink
 
 # Source files organization
-UTIL_SRC := $(SRC_DIR)/util.c
+COMMON_SRC := $(SRC_DIR)/common.c
 ZXCC_CORE_SRCS := $(SRC_DIR)/z80.c $(SRC_DIR)/zxbdos.c $(SRC_DIR)/zxcbdos.c $(SRC_DIR)/zxdbdos.c
 
 # Program-specific sources
-ZXAS_SRCS := $(SRC_DIR)/zxas.c $(UTIL_SRC)
-ZXC_SRCS := $(SRC_DIR)/zxc.c $(UTIL_SRC)
-ZXLIBR_SRCS := $(SRC_DIR)/zxlibr.c $(UTIL_SRC)
-ZXLINK_SRCS := $(SRC_DIR)/zxlink.c $(UTIL_SRC)
+ZXAS_SRCS := $(SRC_DIR)/zxas.c $(COMMON_SRC)
+ZXC_SRCS := $(SRC_DIR)/zxc.c $(COMMON_SRC)
+ZXLIBR_SRCS := $(SRC_DIR)/zxlibr.c $(COMMON_SRC)
+ZXLINK_SRCS := $(SRC_DIR)/zxlink.c $(COMMON_SRC)
 ZXCC_SRCS := $(SRC_DIR)/zxcc.c $(ZXCC_CORE_SRCS)
 
 # Object files for each program
