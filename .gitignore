@@ -1,0 +1,6 @@
+.vscode
+.DS_Store
+zxcc/obj
+zxcc/bin
+zxcc/cpmio/lib
+zxcc/cpmredir/lib
