@@ -101,6 +101,10 @@ $(OBJ_DIR)/zxbdos.o: $(INC_DIR)/zxbdos.h $(INC_DIR)/zxcbdos.h
 # Install/uninstall targets
 PREFIX ?= /usr/local
 BIN_INSTALL_DIR = $(PREFIX)/bin
+BIOS_SRC = bios/bios.bin
+CPM_LIB_DIR = $(PREFIX)/lib/cpm
+BIN80_DIR = $(CPM_LIB_DIR)/bin80
+BIOS_INSTALL_DIR = $(BIN80_DIR)
 
 install: all
 	@echo "Installing programs to $(BIN_INSTALL_DIR)"
@@ -108,6 +112,10 @@ install: all
 	@for prog in $(PROGRAMS); do \
 		install -v -m 0755 $(BIN_DIR)/$$prog $(BIN_INSTALL_DIR)/$$prog; \
 	done
+	
+	@echo "Installing BIOS to $(BIOS_INSTALL_DIR)"
+	@mkdir -p $(BIOS_INSTALL_DIR)
+	@install -v -m 0644 $(BIOS_SRC) $(BIOS_INSTALL_DIR)/bios.bin
 	@echo "Installation complete"
 
 uninstall:
@@ -115,4 +123,7 @@ uninstall:
 	@for prog in $(PROGRAMS); do \
 		rm -fv $(BIN_INSTALL_DIR)/$$prog; \
 	done
+	
+	@echo "Removing BIOS from $(BIOS_INSTALL_DIR)"
+	@rm -fv $(BIOS_INSTALL_DIR)/bios.bin
 	@echo "Uninstallation complete"
